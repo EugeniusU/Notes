@@ -8,17 +8,33 @@ var el = {names: names, phone: phone};
 
 var inputNumber = 0;
 var num = [1, 4, 7, 9];
+var numC = false;
 
 phone.addEventListener('keypress', function(event) {
-    if (inputNumber == 11) {
-        alert('Номер больше 10 цифр');
-    }
-    num.forEach(function (a) {
-        if (a == inputNumber) {
-            phone.value = phone.value + ' ';
+    if (isNaN(Number(phone.value[phone.value.length - 1])) && !numC) {
+		alert('Номер должен состоять из цифр');
+		numC = true;
+	}
+    if (phone.value.length == 0) {
+		inputNumber = 0;
+	}
+    if (event.keyCode == 8 && phone.value[phone.value.length - 1] != ' ') {
+		inputNumber--;
+	}
+    if (event.keyCode == 8 && phone.value[phone.value.length - 2] == ' ') {
+		phone.value = phone.value.slice(0, phone.value.length - 1);
+	}
+    if (event.keyCode != 8) {
+        if (inputNumber == 11) {
+            alert('Номер больше 10 цифр');
         }
-    });
-    inputNumber++;
+        num.forEach(function (a) {
+            if (a == inputNumber) {
+                phone.value = phone.value + ' ';
+            }
+        });
+        inputNumber++;
+    }
 });
 
 function elementsId() {
@@ -67,6 +83,13 @@ button.addEventListener('click', function() {
     var currentData = {names: names.value, phone: phone.value, id: elementsId()};
     addFromInput(currentData);
     saveToStorage(currentData);
+    
+    inputNumber = 0;
+	for (key in el) {
+		el[key].value = inputValues[key];
+		el[key].style.color = 'grey';
+        el[key].style.fontSize = '12px';
+	}
 });
 
 function createEl(idE) {
