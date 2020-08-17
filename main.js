@@ -11,12 +11,13 @@ var num = [1, 4, 7, 9];
 var numC = false;
 
 phone.addEventListener('keypress', function(event) {
-    if (isNaN(Number(phone.value[phone.value.length - 1])) && !numC) {
+    if (isNaN(Number(String.fromCharCode(event.keyCode))) && !numC && inputNumber && event.keyCode != 8) {
 		alert('Номер должен состоять из цифр');
 		numC = true;
 	}
     if (phone.value.length == 0) {
 		inputNumber = 0;
+	    	numC = false;
 	}
     if (event.keyCode == 8 && phone.value[phone.value.length - 1] != ' ') {
 		inputNumber--;
