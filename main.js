@@ -10,7 +10,7 @@ var inputNumber = 0;
 var num = [1, 4, 7, 9];
 var numC = false;
 
-phone.addEventListener('keypress', function(event) {
+phone.addEventListener('keydown', function(event) {
     if (isNaN(Number(String.fromCharCode(event.keyCode))) && !numC && inputNumber && event.keyCode != 8) {
 		alert('Номер должен состоять из цифр');
 		numC = true;
