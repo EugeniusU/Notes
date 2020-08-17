@@ -11,6 +11,9 @@ var num = [1, 4, 7, 9];
 var numC = false;
 
 phone.addEventListener('keydown', function(event) {
+    if (event.keyCode == 13) {
+		button.click();
+	}
     if (isNaN(Number(String.fromCharCode(event.keyCode))) && !numC && inputNumber && event.keyCode != 8) {
 		alert('Номер должен состоять из цифр');
 		numC = true;
